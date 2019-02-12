@@ -11,7 +11,6 @@ public class LinkedList {
     private Node head;
     private int size;
 
-
     public LinkedList(int head) {
         this.head = new Node(head);
     }
