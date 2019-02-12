@@ -59,6 +59,7 @@ public class Stack<T> {
     public static void main(String[] args) {
 
         Stack stack = new Stack();
+        
         System.out.println("Pushing 1..");
         stack.push(1);
         System.out.println("Pushing 2..");
