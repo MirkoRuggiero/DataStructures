@@ -73,7 +73,7 @@ public class Stack<T> {
 
         System.out.println("Peeking..");
         System.out.println(stack.peek());
-        
+
         System.out.println("Is empty? " + stack.isEmpty());
         System.out.println("Popping..");
         System.out.println(stack.pop());
