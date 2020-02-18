@@ -87,7 +87,7 @@ public class DoubleLinkedList {
         System.out.println();
     }
 
-    class Node {
+    static class Node {
         int value;
         Node next;
         Node prev;

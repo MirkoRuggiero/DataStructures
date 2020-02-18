@@ -1,6 +1,6 @@
 package stack;
 
-public class Stack<T> {
+public class Stack {
 
     private final int MAX_SIZE = 1000;
     private int top = -1;
