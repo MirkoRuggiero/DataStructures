@@ -6,19 +6,20 @@ public class CircularDoubleLinkedList<T> {
     private int size;
 
     public static void main(String[] args) {
-        CircularDoubleLinkedList<Integer> cdll = new CircularDoubleLinkedList<>();
+        CircularDoubleLinkedList<String> cdll = new CircularDoubleLinkedList<>();
 //    cdll.add(0);
-        cdll.add(1);
-        cdll.add(2);
-        cdll.add(3);
-        cdll.add(4);
-        cdll.addHead(0);
+        cdll.add("uno");
+        cdll.add("due");
+        cdll.add("tre");
+        cdll.add("quattro");
+        cdll.addHead("zero");
+        cdll.add(null);
         cdll.print();
         cdll.printReverse();
 //        for (int i = 0; i < 10; i++) {
 //            System.out.println(i + " " + cdll.contain(i));
 //        }
-        System.out.println(cdll.contain(0));
+        System.out.println(cdll.contain("zero"));
     }
 
     public void add(T element) {
@@ -68,7 +69,7 @@ public class CircularDoubleLinkedList<T> {
         Node<T> head = node;
         int index = size;
         while (index > 0) {
-            if (head.data == element) {
+            if (head.data.equals(element)) {
                 return index;
             }
             head = head.next;
@@ -82,13 +83,22 @@ public class CircularDoubleLinkedList<T> {
     }
 
     public void remove(T element) {
-        //TODO remove first occurence
+        //remove first occurrence
+        Node<T> head = node;
+        int index = size;
+        while (index > 0) {
+            if (head.data.equals(element)) {
+                //TODO do not call remove at index
+                remove(index - 1);
+                return;
+            }
+            index--;
+        }
     }
 
     public void remove(int index) {
         //TODO
     }
-
 
 
     @Override
