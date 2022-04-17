@@ -4,8 +4,13 @@ public final class BinarySearchTree {
 
     private Node root;
 
+    public Node getRoot() {
+        return root;
+    }
+
     public static void main(String[] args) {
         BinarySearchTree binarySearchTree = new BinarySearchTree();
+
         binarySearchTree.insert(10);
         binarySearchTree.insert(5);
         binarySearchTree.insert(20);
@@ -13,21 +18,27 @@ public final class BinarySearchTree {
         binarySearchTree.insert(9);
         binarySearchTree.insert(15);
         binarySearchTree.insert(30);
-
-        System.out.println(binarySearchTree.contains(5));
-        System.out.println(binarySearchTree.contains(20));
-        System.out.println(binarySearchTree.contains(30));
+        binarySearchTree.insert(30);
+        binarySearchTree.insert(7);
+        binarySearchTree.insert(27);
+        binarySearchTree.insert(16);
+        binarySearchTree.insert(4);
+        binarySearchTree.insert(8);
 
         binarySearchTree.print();
 
+        System.out.println("Contains 5 " + binarySearchTree.contains(5));
+        System.out.println("Contains 20 " + binarySearchTree.contains(20));
+        System.out.println("Contains 30 " + binarySearchTree.contains(30));
 
         binarySearchTree.delete(5);
         binarySearchTree.delete(20);
-
-        System.out.println(binarySearchTree.contains(5));
-        System.out.println(binarySearchTree.contains(20));
-
+        System.out.println("Deleting 5 and 20");
         binarySearchTree.print();
+
+
+        System.out.println("Contains 5 " + binarySearchTree.contains(5));
+        System.out.println("Contains 20 " + binarySearchTree.contains(20));
     }
 
     public void insert(int value) {
@@ -53,7 +64,7 @@ public final class BinarySearchTree {
 
     private Node delete(Node node, int value) {
         if (node == null) {
-            return node;
+            return null;
         }
         if (value == node.value) {
             if (node.left == null && node.right == null) {
@@ -99,23 +110,52 @@ public final class BinarySearchTree {
         return search(node.right, value);
     }
 
-    public void print() {
-        print(root, 0);
+    public int getDepth(int value) {
+        return getDepth(this.root, value, 1);
     }
 
-    private void print(Node node, int indentation) {
-        if (node != null) {
-            for (int i = 0; i < indentation; i++) {
-                System.out.print(" ");
-            }
-            System.out.print(node.value + "\n");
-            if (node.left != null) {
-                print(node.left, indentation + 4);
-            }
-            if (node.right != null) {
-                print(node.right, indentation + 4);
-            }
-
+    private int getDepth(Node node, int value, int lvl) {
+        if (node == null) {
+            return -1;
         }
+        if (value == node.value) {
+            return lvl;
+        }
+        int foundLeft = getDepth(node.left, value, lvl + 1);
+        if (foundLeft != -1) {
+            return foundLeft;
+        }
+        return getDepth(node.right, value, lvl + 1);
+    }
+
+    public void print() {
+        TreePrinter.print(this.root);
+    }
+
+    public int depth() {
+        return depth(this.root);
+    }
+
+    private int depth(Node root) {
+        int c = 0;
+        if (root != null) {
+            c++;
+            c += Math.max(depth(root.left), depth(root.right));
+        }
+        return c;
+    }
+
+    public boolean haveSameParent(int a, int b) {
+        return haveSameParent(root, a, b);
+    }
+
+    private boolean haveSameParent(Node root, int a, int b) {
+        if (root == null) {
+            return false;
+        }
+        return (root.left != null && root.left.value == a && root.right != null && root.right.value == b)
+                || (root.left != null && root.left.value == b && root.right != null && root.right.value == a)
+                || haveSameParent(root.left, a, b)
+                || haveSameParent(root.right, a, b);
     }
 }

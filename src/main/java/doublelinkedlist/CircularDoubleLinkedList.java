@@ -1,5 +1,7 @@
 package doublelinkedlist;
 
+import com.google.common.base.Preconditions;
+
 public class CircularDoubleLinkedList<T> {
 
     private Node<T> node;
@@ -13,13 +15,11 @@ public class CircularDoubleLinkedList<T> {
         cdll.add("tre");
         cdll.add("quattro");
         cdll.addHead("zero");
-        cdll.add(null);
+//        cdll.add(null);
         cdll.print();
         cdll.printReverse();
-//        for (int i = 0; i < 10; i++) {
-//            System.out.println(i + " " + cdll.contain(i));
-//        }
-        System.out.println(cdll.contain("zero"));
+
+        System.out.println(cdll.contains("zero"));
     }
 
     public void add(T element) {
@@ -31,6 +31,7 @@ public class CircularDoubleLinkedList<T> {
     }
 
     public void addTail(T element) {
+        Preconditions.checkNotNull(element);
         Node<T> nodeToAdd = new Node<>(element);
         Node<T> head = node;
         if (node == null) {
@@ -53,16 +54,15 @@ public class CircularDoubleLinkedList<T> {
         if (node == null) {
             nodeToAdd.next = nodeToAdd;
             nodeToAdd.previous = nodeToAdd;
-            node = nodeToAdd;
         } else {
             nodeToAdd.next = node;
             nodeToAdd.previous = node.previous;
-            node = nodeToAdd;
         }
+        node = nodeToAdd;
         size++;
     }
 
-    public int contain(T element) {
+    public int contains(T element) {
         if (node.data == element) {
             return 0;
         }

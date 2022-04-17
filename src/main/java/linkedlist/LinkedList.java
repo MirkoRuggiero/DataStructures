@@ -4,7 +4,6 @@ package linkedlist;
  * Singly linked list
  * Compared to the doubly linked list, this has a smaller memory footprint but during traversal you only have the reference to the next node.
  * It means that you don't have access to the previous node.
- *
  */
 public class LinkedList {
 
@@ -196,9 +195,8 @@ public class LinkedList {
         ll.addAtTail(3);
         ll.printList();
 
-        System.out.println(ll.find(0)); //should be 1
-        System.out.println(ll.find(new Node(2))); //should be 1
-        ll.printList();
+        assert ll.find(0).data == 1;
+        assert ll.find(new Node(2)) == 1;
 
         ll.addAtIndex(0, 0);
         ll.printList();
@@ -206,6 +204,6 @@ public class LinkedList {
         ll.deleteAtIndex(0);
         ll.printList();
 
-        System.out.println(ll.findLastElement());
+        assert ll.findLastElement().data == 3;
     }
 }
