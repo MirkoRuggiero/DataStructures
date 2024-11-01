@@ -109,9 +109,9 @@ public class TreeTraversal {
         if (root == null) {
             return;
         }
-        traversedNodes.add(root.value);
-        postOrderTraversal(root.right, traversedNodes);
         postOrderTraversal(root.left, traversedNodes);
+        postOrderTraversal(root.right, traversedNodes);
+        traversedNodes.add(root.value);
     }
 
     public static void BFStraversal(Node root, List<Integer> traversedNodes) {
